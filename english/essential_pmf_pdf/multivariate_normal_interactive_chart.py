@@ -14,7 +14,11 @@ import tensorflow_probability as tfp
 
 
 def main():
-    st.set_page_config(page_title="Multivariate Normal", layout="wide")
+    st.set_page_config(
+        page_title="Multivariate Normal",
+        layout="wide",
+        page_icon="https://user-images.githubusercontent.com/27728103/116659788-6a611a00-a992-11eb-9cc7-ce02db99f106.png"
+    )
 
     st.title("Interactive Plot for the Multivariate Normal")
 
@@ -78,7 +82,7 @@ def main():
 
     # Watermark
     col_left.markdown("""
-        With ❤️ by [Machine Learning & Simulation](https://www.youtube.com/channel/UCh0P7KwJhuQ4vrzc3IRuw4Q)
+        Made with ❤️ by [Machine Learning & Simulation](https://www.youtube.com/channel/UCh0P7KwJhuQ4vrzc3IRuw4Q)
     """)
 
     # Display mean and covariance matrix with check for spd
@@ -126,9 +130,9 @@ def main():
         X = tf.reshape(X, -1)
         Y = tf.reshape(Y, -1)
         points_2d = tf.stack((X, Y), axis=1)
-        prob_values = tfp.distributions.MultivariateNormalFullCovariance(
+        prob_values = tfp.distributions.MultivariateNormalTriL(
             loc=mu,
-            covariance_matrix=cov
+            scale_tril=tf.linalg.cholesky(cov)
         ).prob(points_2d)
         Z = tf.reshape(prob_values, (N_POINTS_P_AXIS, N_POINTS_P_AXIS))
 
