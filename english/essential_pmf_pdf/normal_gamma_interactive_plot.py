@@ -107,7 +107,7 @@ def main():
     Tau, Mu = tf.meshgrid(tau, mu)
     Tau = tf.reshape(Tau, -1)
     Mu = tf.reshape(Mu, -1)
-    points_2d = tf.Struc (Tau, Mu)
+    points_2d = (Tau, Mu)
     prob_values = tfp.distributions.JointDistributionCoroutineAutoBatched(
         lambda : gauss_gamma(alpha_0, beta_0, mu_0, tau_0)
     ).prob(points_2d)
