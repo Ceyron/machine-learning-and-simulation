@@ -24,9 +24,14 @@ def em(dataset, n_classes, n_iterations, random_seed):
         #     for c in range(n_classes):
         #         responsibilities[i, c] = class_probs[c] *\
         #             tfp.distributions.Normal(loc=mus[c], scale=sigmas[c]).prob(dataset[i])
+        ################################################
+        ## !!!! That part was wrong in the video !!!!
+        ## Thanks to Anuj Shah for pointing it out
+        ################################################
+        ## -> The correct version will also multiply with the class responsibilities
         responsibilities = tfp.distributions.Normal(loc=mus, scale=sigmas).prob(
             dataset.reshape(-1, 1)
-        ).numpy()
+        ).numpy() * class_probs
         
         responsibilities /= np.linalg.norm(responsibilities, axis=1, ord=1, keepdims=True)
 
