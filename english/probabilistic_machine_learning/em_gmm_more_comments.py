@@ -41,7 +41,7 @@ def em(dataset, n_classes, n_iterations, random_seed):
         ## !!!! That part was wrong in the video !!!!
         ## Thanks to Anuj Shah for pointing it out
         ################################################
-        ## -> The correct version will also multiply with the class responsibilities
+        ## -> The correct version will also multiply with the class probabilities
         responsibilities = tfp.distributions.Normal(loc=mus, scale=sigmas).prob(
             dataset.reshape(-1, 1)
         ).numpy() * class_probs
