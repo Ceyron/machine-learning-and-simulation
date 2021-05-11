@@ -1,7 +1,10 @@
-numpy==1.19.2
-tqdm==4.60.0
-silence_tensorflow==1.1.1
 tensorflow_probability==0.12.1
-plotly==4.14.3
 streamlit==0.81.0
 tensorflow==2.4.1
+plotly==4.14.3
+tensorboard==2.4.0
+numpy==1.19.2
+matplotlib==3.4.1
+silence_tensorflow==1.1.1
+tqdm==4.60.0
+scikit_learn==0.24.2
