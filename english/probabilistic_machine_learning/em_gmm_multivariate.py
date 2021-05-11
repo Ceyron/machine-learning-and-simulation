@@ -4,9 +4,8 @@ Created on Mon May 10 17:17:25 2021
 @author: Anuj Shah
 """
 
-#import silence_tensorflow.auto
+import silence_tensorflow.auto
 import numpy as np
-#from tensorboard import data
 import tensorflow as tf
 import tensorflow_probability as tfp
 tfd=tfp.distributions
@@ -14,10 +13,9 @@ tfd=tfp.distributions
 from tqdm import tqdm # progress-meter
 
 # to create a mock dataset use sklearn make_blobs
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 
-#%%
 
 tf.random.set_seed(42)
 np.random.seed(42)
@@ -72,7 +70,7 @@ def em(datasets, n_classes, n_iterations, random_seed):
     np.random.seed(random_seed)
 
     # Initial guesses for the parameters
-    # Although you an randomly choose the initial parameters
+    # Although you can randomly choose the initial parameters
     # its better to start with some educated guess
     # to guess the low and high for mean
     # low = np.min(datasets)
@@ -95,7 +93,6 @@ def em(datasets, n_classes, n_iterations, random_seed):
         # M-Step
         class_probs = class_responsibilities / n_samples
         for c in range(n_classes):
-            #class_probs[c] = class_responsibilities[c] / n_samples
             mus[c] = np.sum(responsibilities[:, c].reshape(-1,1) * datasets,axis=0) / class_responsibilities[c]
             sigmas[c] = np.sqrt(
                 np.sum(responsibilities[:, c].reshape(-1,1) * (datasets - mus[c])**2,axis=0) / class_responsibilities[c]
@@ -154,7 +151,6 @@ def main():
     plt.contour(x1,x2,p.reshape(x1.shape))
     ax.plot_surface(x1, x2, p.reshape(x1.shape), cmap='viridis')
     plt.title('3d plot showing two distributions')
-    plt.show()
         
     # Now assuming that we just hav dataset and we don't know the distribution 
     # parameters lets use Expectation-Maximization for estimating the paameters
@@ -170,6 +166,8 @@ def main():
     print('True mean: ', mus_true)
     print('True sigma: ', sigmas_true)
     print('True class prob: ', class_probs_true)
+
+    plt.show()
 
 if __name__ == "__main__":
     main()
