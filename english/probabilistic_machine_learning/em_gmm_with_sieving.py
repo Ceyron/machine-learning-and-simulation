@@ -7,65 +7,65 @@ import matplotlib.pyplot as plt
 
 from tqdm import tqdm # progress-meter
 
-def em(dataset, n_classes, n_iterations, random_seed):
-    n_samples = dataset.shape[0]
+# def em(dataset, n_classes, n_iterations, random_seed):
+#     n_samples = dataset.shape[0]
 
-    np.random.seed(random_seed)
+#     np.random.seed(random_seed)
 
-    # Initial guesses for the parameters
-    mus = np.random.rand(n_classes)
-    sigmas = np.random.rand(n_classes)
-    class_probs = np.random.dirichlet(np.ones(n_classes))
+#     # Initial guesses for the parameters
+#     mus = np.random.rand(n_classes)
+#     sigmas = np.random.rand(n_classes)
+#     class_probs = np.random.dirichlet(np.ones(n_classes))
 
-    for em_iter in tqdm(range(n_iterations)):
-        # E-Step
-        responsibilities = tfp.distributions.Normal(loc=mus, scale=sigmas).prob(
-            dataset.reshape(-1, 1)
-        ).numpy() * class_probs
+#     for em_iter in tqdm(range(n_iterations)):
+#         # E-Step
+#         responsibilities = tfp.distributions.Normal(loc=mus, scale=sigmas).prob(
+#             dataset.reshape(-1, 1)
+#         ).numpy() * class_probs
         
-        responsibilities /= np.linalg.norm(responsibilities, axis=1, ord=1, keepdims=True)
+#         responsibilities /= np.linalg.norm(responsibilities, axis=1, ord=1, keepdims=True)
 
-        class_responsibilities = np.sum(responsibilities, axis=0)
+#         class_responsibilities = np.sum(responsibilities, axis=0)
 
-        # M-Step
-        for c in range(n_classes):
-            class_probs[c] = class_responsibilities[c] / n_samples
-            mus[c] = np.sum(responsibilities[:, c] * dataset) / class_responsibilities[c]
-            sigmas[c] = np.sqrt(
-                np.sum(responsibilities[:, c] * (dataset - mus[c])**2) / class_responsibilities[c]
-            )
+#         # M-Step
+#         for c in range(n_classes):
+#             class_probs[c] = class_responsibilities[c] / n_samples
+#             mus[c] = np.sum(responsibilities[:, c] * dataset) / class_responsibilities[c]
+#             sigmas[c] = np.sqrt(
+#                 np.sum(responsibilities[:, c] * (dataset - mus[c])**2) / class_responsibilities[c]
+#             )
 
-        # Calculate the marginal log likelihood
-        log_likelihood = np.sum(
-            logsumexp(
-                np.log(class_probs)
-                +
-                tfp.distributions.Normal(loc=mus, scale=sigmas).log_prob(
-                    dataset.reshape(-1, 1)
-                ).numpy()
-                ,
-                axis=1
-            )
-            ,
-            axis=0
-        )
-        print(log_likelihood)
+#         # Calculate the marginal log likelihood
+#         log_likelihood = np.sum(
+#             logsumexp(
+#                 np.log(class_probs)
+#                 +
+#                 tfp.distributions.Normal(loc=mus, scale=sigmas).log_prob(
+#                     dataset.reshape(-1, 1)
+#                 ).numpy()
+#                 ,
+#                 axis=1
+#             )
+#             ,
+#             axis=0
+#         )
+#         print(log_likelihood)
     
-    return class_probs, mus, sigmas
+#     return class_probs, mus, sigmas
 
 def em_with_guesses(
     dataset,
     n_iterations,
+    class_probs_initial,
     mus_initial,
     sigmas_initial,
-    class_probs_initial,
 ):
     n_classes = class_probs_initial.shape[0]
     n_samples = dataset.shape[0]
 
+    class_probs = class_probs_initial.copy()
     mus = mus_initial.copy()
     sigmas = sigmas_initial.copy()
-    class_probs = class_probs_initial.copy()
 
     log_likelihood_history = []
 
@@ -132,9 +132,9 @@ def em_sieved(
         class_probs, mus, sigmas, log_likelihood_history = em_with_guesses(
             dataset,
             n_iterations_pre_sieving,
+            class_probs,
             mus,
             sigmas,
-            class_probs
         )
         mus_list.append(mus)
         sigmas_list.append(sigmas)
@@ -157,9 +157,9 @@ def em_sieved(
         class_probs, mus, sigmas, log_likelihood_history = em_with_guesses(
             dataset,
             n_iterations_post_sieving,
+            class_probs_list[chosen_one_id],
             mus_list[chosen_one_id],
             sigmas_list[chosen_one_id],
-            class_probs_list[chosen_one_id],
         )
 
         mus_chosen_ones_list.append(mus)
