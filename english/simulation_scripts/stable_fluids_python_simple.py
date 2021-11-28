@@ -10,7 +10,7 @@ Incompressibility:  ∇ ⋅ u = 0
 
 u:  Velocity (2d vector)
 p:  Pressure
-f:  Forcing (here =0)
+f:  Forcing
 ν:  Kinematic Viscosity
 ρ:  Density
 t:  Time
