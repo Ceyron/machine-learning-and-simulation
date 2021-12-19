@@ -105,7 +105,7 @@ Solution Strategy:
 3. Diffuse implicitly (Solve a linear system matrix-free
    by Conjugate Gradient) -> unconditionally stable
 
-    (I − ν/Δt ∇²)w₃ = w₂
+    (I − ν Δt ∇²)w₃ = w₂
 
 4.1 Compute a pressure correction (Solve a linear system
     matrix-free by Conjugate gradient)
