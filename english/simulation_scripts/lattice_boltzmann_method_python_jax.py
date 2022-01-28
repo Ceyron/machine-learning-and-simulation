@@ -1,6 +1,6 @@
 r"""
 Solves the incompressible Navier Stokes equations using the Lattice-Boltzmann
-Method. The scenario is the flow around a cylinder in 2D which yields a van
+Method¹. The scenario is the flow around a cylinder in 2D which yields a van
 Karman vortex street.
 
 
@@ -27,6 +27,12 @@ inflow  | --->        **********                                      |  outflow
    uses a no-slip Boundary Condition
 -> initially, fluid is NOT at rest and has the horizontal velocity profile
    all over the domain
+
+¹ To be fully correct, LBM considers the compressible Navier-Stokes Equations.
+This can also be seen by the fact that we have a changing macroscopic density over
+the domain and that we actively use it throughout the computations. However, our
+flow speeds are below the 0.3 Mach limit which results in only minor density
+fluctuations. Hence, the fluid behaves almost incompressible. 
 
 ------
 
@@ -136,7 +142,13 @@ Then the relaxation factor is computed according to
 
 ------
 
-Note that this scheme is instable for Reynoldsnumbers >~ 350
+Note that this scheme can become unstable for Reynoldsnumbers >~ 350 ²
+
+² Note that the stability of the D2Q9 scheme is mathematically not
+linked to the Reynoldsnumber. Just use this as a reference. Stability
+for this scheme is realted to the velocity magnitude.
+Consequentially, the actual limiting factor is the Mach number (the
+ratio between velocity magnitude and the speed of sound).
 
 """
 import jax
