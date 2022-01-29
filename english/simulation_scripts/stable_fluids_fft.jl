@@ -103,6 +103,9 @@ Changes with respect to the original video (https://youtu.be/F7rWoxeGrko)
 
 1. Use dark theme, set to equal aspect ratio and increase plot window size
 
+2. Change to periodic clamping which respects the periodic boundary conditions,
+   then also increase the number of time steps.
+
 """
 
 using FFTW
@@ -114,17 +117,18 @@ using LinearAlgebra
 N_POINTS = 250
 KINEMATIC_VISCOSITY = 0.0001
 TIME_STEP_LENGTH = 0.01
-N_TIME_STEPS = 50
+N_TIME_STEPS = 300
 
 function backtrace!(
     backtraced_positions,
     original_positions,
     direction,
 )
-    # Euler Step backwards in time
-    backtraced_positions[:] = original_positions - TIME_STEP_LENGTH * direction
-
-    clamp!(backtraced_positions, 0.0, 1.0)
+    # Euler Step backwards in time and periodically clamp into [0.0, 1.0]
+    backtraced_positions[:] = mod1.(
+        original_positions - TIME_STEP_LENGTH * direction,
+        1.0,
+    )
 end
 
 function interpolate_positions!(
