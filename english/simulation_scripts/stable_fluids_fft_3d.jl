@@ -88,6 +88,8 @@ Changes with respect to the original video (https://youtu.be/bvPi6XwdM0U)
 1. Change the time pre-factor to the forcing back to apply longer
    (see step (1) in the time loop)
 
+2. Use periodic clamping and increase number of timesteps
+
 """
 
 using FFTW
