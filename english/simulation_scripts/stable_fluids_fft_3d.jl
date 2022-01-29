@@ -80,6 +80,14 @@ k = [ k_x, k_y, k_z ] are the spatial frequencies (= wavenumbers)
 
 The Fourier Transformation implicitly prescribes the periodic
 Boundary Conditions
+
+-------
+
+Changes with respect to the original video (https://youtu.be/bvPi6XwdM0U)
+
+1. Change the time pre-factor to the forcing back to apply longer
+   (see step (1) in the time loop)
+
 """
 
 using FFTW
@@ -91,17 +99,18 @@ using LinearAlgebra
 N_POINTS = 40
 KINEMATIC_VISCOSITY = 0.0001
 TIME_STEP_LENGTH = 0.01
-N_TIME_STEPS = 100
+N_TIME_STEPS = 200
 
 function backtrace!(
     backtraced_positions,
     original_positions,
     direction,
 )
-    # Euler Step backwards in time
-    backtraced_positions[:] = original_positions - TIME_STEP_LENGTH * direction
-
-    clamp!(backtraced_positions, 0.0, 1.0)
+    # Euler Step backwards in time and periodically clamp into [0.0, 1.0]
+    backtraced_positions[:] = mod1.(
+        original_positions - TIME_STEP_LENGTH * direction,
+        1.0
+    )
 end
 
 function interpolate_positions!(
@@ -208,7 +217,7 @@ function main()
 
         # (1) Apply the forces
         time_current = (iter - 1) * TIME_STEP_LENGTH
-        pre_factor = max(1 - 2 * time_current, 0.0)
+        pre_factor = max(1 - time_current, 0.0)
         velocity_x_prev += TIME_STEP_LENGTH * pre_factor * force_x
 
         # (2) Self-Advection by backtracing and interpolation
