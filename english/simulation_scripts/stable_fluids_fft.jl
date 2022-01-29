@@ -96,6 +96,13 @@ k = [ kₓ, k_y ] are the spatial frequencies (= wavenumbers)
 
 The Fourier Transformation implicitly prescribes the periodic
 Boundary Conditions
+
+------
+
+Changes with respect to the original video (https://youtu.be/F7rWoxeGrko)
+
+1. Use dark theme, set to equal aspect ratio and increase plot window size
+
 """
 
 using FFTW
@@ -177,6 +184,9 @@ function main()
     velocity_y_fft = zero(velocity_y)
     pressure_fft = zero(coordinates_x)
 
+    # Use a dark theme for plotting
+    theme(:dark)
+
     @showprogress "Timestepping ..." for iter in 1:N_TIME_STEPS
 
         # (1) Apply the forces
@@ -235,7 +245,7 @@ function main()
         d_u__d_y = diff(velocity_x, dims=2)[2:end, :]
         d_v__d_x = diff(velocity_y, dims=1)[:, 2:end]
         curl = d_u__d_y - d_v__d_x
-        display(heatmap(x_interval, y_interval, curl', c=:diverging_bkr_55_10_c35_n256))
+        display(heatmap(x_interval, y_interval, curl', c=:diverging_bkr_55_10_c35_n256, aspect_ratio=:equal, size=(680, 650)))
     end
 end
 
