@@ -1,7 +1,5 @@
 ![# Mathematics for Machine Learning and Simulation](https://user-images.githubusercontent.com/27728103/113576088-327ae700-961f-11eb-9611-05a9c8e7a0b1.png)
 
-<a href="https://www.patreon.com/bePatron?u=69062905" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-
 Here you can find all the material of my [YouTube Channel](https://www.youtube.com/channel/UCh0P7KwJhuQ4vrzc3IRuw4Q).
 
 ## Overview
@@ -77,5 +75,5 @@ Contribution to this repo are always welcome. If you extended one of my source-c
 
 ## Donation
 
-If you like the content of this repo, please consider ["buying me a coffee"](https://www.buymeacoffee.com/MLsim)
+If you like the content of this repo, please consider [becoming a Patreon](https://www.patreon.com/MLsim)
     
