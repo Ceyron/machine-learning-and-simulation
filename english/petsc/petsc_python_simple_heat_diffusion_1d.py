@@ -1,7 +1,7 @@
 """
-Uses the Python interface to PetSc (petsc4py) to solve the transient 1D heat
+Uses the Python interface to PETSc (petsc4py) to solve the transient 1D heat
 diffusion with Dirichlet Boundary Conditions. This is a super simple example
-showcase of the linear iterative solvers PetSc has to offer. It runs
+showcase of the linear iterative solvers PETSc has to offer. It runs
 sequentially without MPI.
 
 Consider the 1D heat equation defining how a temperature is distributed e.g.
@@ -91,7 +91,7 @@ Dirichlet DoF. Hence, it is also not symmetric.
 
 -----
 
-The PetSc linear solver can be set at runtime.
+The PETSc linear solver can be set at runtime.
 
 Use this command to monitor the solution process:
 
@@ -119,7 +119,7 @@ def main():
     element_length = 1.0 / (N_POINTS - 1)
     mesh = np.linspace(0.0, 1.0, N_POINTS)
 
-    # Create a new sparse PetSc matrix, fill it and then assemble it
+    # Create a new sparse PETSc matrix, fill it and then assemble it
     A = PETSc.Mat().createAIJ([N_POINTS, N_POINTS])
     A.setUp()
 
@@ -149,7 +149,7 @@ def main():
     b.setValue(0, 0.0)
     b.setValue(N_POINTS-1, 0.0)
 
-    # Allocate a PetSc vector storing the solution to the linear system
+    # Allocate a PETSc vector storing the solution to the linear system
     x = PETSc.Vec().createSeq(N_POINTS)
 
     # Instantiate a linear solver: Krylow subspace linear iterative solver
