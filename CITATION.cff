@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you find the Repository and corresponding YouTube videos helpful, please cite as below."
+authors:
+- family-names: "Koehler"
+  given-names: "Felix"
+title: "Machine Learning and Simulation"
+url: "https://github.com/ceyron/machine-learning-and-simulation"
