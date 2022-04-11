@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""LBM 3D drag.ipynb
+"""
 
 # The Lattice Boltzmann Method - stress and force
 
