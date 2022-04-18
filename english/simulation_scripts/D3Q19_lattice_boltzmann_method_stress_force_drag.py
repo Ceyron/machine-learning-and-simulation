@@ -40,11 +40,7 @@ jax.config.update("jax_enable_x64", True)
 
 # Define functions
 def get_strain_rate_tensor_FD(macroscopic_velocities):
-  disalligned_gradients = jnp.array(
-      [jnp.gradient(macroscopic_velocities[..., i]) for i in range(3)])
-  
-  gradients = jnp.einsum('ij... -> ...ij', 
-                         disalligned_gradients)
+  gradients = jnp.gradients(macroscopic_velocities, axis = -1)
   return - (gradients + 
             jnp.einsum('...ij -> ...ji', 
                        gradients)
