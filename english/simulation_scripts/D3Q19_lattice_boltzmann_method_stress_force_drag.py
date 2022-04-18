@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 
 # The Lattice Boltzmann Method - stress and force
@@ -41,7 +40,7 @@ jax.config.update("jax_enable_x64", True)
 # Define functions
 def get_strain_rate_tensor_FD(macroscopic_velocities):
   _gradients = jnp.gradient(macroscopic_velocities, axis = (0, 1, 2))
-  gradients = jnp.einsum('dD...-> ...dD', jnp.array(_gradients))
+  gradients = jnp.einsum('d...D-> ...dD', jnp.array(_gradients))
   return - (gradients + 
             jnp.einsum('...ij -> ...ji', 
                        gradients)
@@ -125,9 +124,9 @@ RELAXATION_OMEGA = (1.0 /
                      )
                     )
 
-print('Reynolds number: ', reynolds_number_L)
-print('Mach number:             ', mach_number_L)
-print('Relaxation time:         ', 1/RELAXATION_OMEGA)
+print(f'Reynolds number:  {reynolds_number_L: g}')
+print(f'Mach number:      {mach_number_L: g}')
+print(f'Relaxation time:  {1.0 /RELAXATION_OMEGA: g}')
 
 if __name__ == '__main__':
     # Define a mesh
