@@ -9,7 +9,5 @@ tensorflow_probability==0.15.0
 jax==0.2.25
 numpy>=1.20.0
 silence_tensorflow==1.1.1
-clawpack==5.8.2
 cmasher==1.6.3
-petsc4py==3.17.0
 scikit_learn==1.0.2
