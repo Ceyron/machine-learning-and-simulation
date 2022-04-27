@@ -264,13 +264,13 @@ sphere = jnp.sqrt((X - x[nx//5])**2 +
 
 OBSTACLE_MASK = sphere < RADIUS_L
 
-# Show from all sides
-plt.imshow(OBSTACLE_MASK[:, :, nz//2].T)
-plt.show()
-plt.imshow(OBSTACLE_MASK[nx//5, :, :].T)
-plt.show()
-plt.imshow(OBSTACLE_MASK[:, ny//2, :].T)
-plt.show()
+# Show from all sides (uncomment if needed)
+# plt.imshow(OBSTACLE_MASK[:, :, nz//2].T)
+# plt.show()
+# plt.imshow(OBSTACLE_MASK[nx//5, :, :].T)
+# plt.show()
+# plt.imshow(OBSTACLE_MASK[:, ny//2, :].T)
+# plt.show()
 
 # Setup the discrete velocities
 N_DISCRETE_VELOCITIES = 19
@@ -399,6 +399,7 @@ if __name__ == '__main__':
     
     def run(discrete_velocities_prev, axis1 = 0, axis2 = 0):   
         C_d = []
+        plt.figure(figsize=(15, 12))
         for i in tqdm(range(NUMBER_OF_ITERATIONS)):
             discrete_velocities_next = update(discrete_velocities_prev)
             discrete_velocities_prev = discrete_velocities_next
@@ -425,39 +426,44 @@ if __name__ == '__main__':
                 strain_rate_tensor_LB = get_strain_rate_tensor_LB(discrete_velocities_next, macroscopic_velocities, density)
                 strain_rate_LB = strain_rate_tensor_LB[..., axis1, axis2]
     
-                fig, axs = plt.subplots(4, 1, figsize = (15, 12))
-                axs[0].contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
+                plt.subplot(2, 2, 1)
+                plt.contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
                                 velocity_magnitude[:, :,  nz//2], 
                                 alpha=0.8, 
                                 cmap=cmr.amber)  
-                axs[0].set_aspect('equal', adjustable='box')
-                axs[0].axis('off')
+                # plt.set_aspect('equal', adjustable='box')
+                plt.axis('off')
     
                 # Compare the two methods for determining the strain rate tensor
-                axs[1].contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
+                plt.subplot(2, 2, 2)
+                plt.contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
                                 strain_rate_FD[..., nz//2], 
                                 levels = 50, 
                                 alpha = 0.8, 
                                 cmap = cm.seismic)  
-                axs[1].set_aspect('equal', adjustable='box')
-                axs[1].axis('off')
+                # plt.set_aspect('equal', adjustable='box')
+                plt.axis('off')
     
-                axs[2].contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
+                plt.subplot(2, 2, 3)
+                plt.contourf(X[:, :, nz//2], Y[:, :,  nz//2], 
                                 strain_rate_LB[..., nz//2], 
                                 levels = 50, 
                                 alpha = 0.8, 
                                 cmap = cm.seismic)  
                 
-                axs[2].set_aspect('equal', adjustable='box')
-                axs[2].axis('off')
+                # plt.set_aspect('equal', adjustable='box')
+                plt.axis('off')
                 
                 # Plot the drag coefficient for so far
-                axs[3].plot(C_d[SKIP_FIRST_N:], 'k')
-                axs[3].grid()
-                axs[3].set_xlabel('Number of iterations')
-                axs[3].set_ylabel('Drag coefficient')
-                fig.tight_layout()
+                plt.subplot(2, 2, 4)
+                plt.plot(C_d[SKIP_FIRST_N:], 'k')
+                plt.grid()
+                plt.xlabel('Number of iterations')
+                plt.ylabel('Drag coefficient')
+                plt.tight_layout()
                 plt.draw()
+                plt.pause(0.01)
+                plt.clf()
         return discrete_velocities_next
     
     
