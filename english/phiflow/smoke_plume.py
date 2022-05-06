@@ -105,7 +105,7 @@ def main():
         y=200,
         bounds=flow.Box(x=100, y=100),
     )
-    INFLOW = 0.2 * flow.CenteredGrid(
+    inflow = 0.2 * flow.CenteredGrid(
         values=flow.SoftGeometryMask(
             flow.Sphere(
                 x=40,
@@ -120,21 +120,22 @@ def main():
 
     @flow.math.jit_compile
     def step(velocity_prev, smoke_prev, dt=1.0):
-        smoke_next = flow.advect.mac_cormack(smoke_prev, velocity_prev, dt) + INFLOW
-        buoyancy = smoke_next * (0, 0.1) @ velocity_prev
-        velocity_tent = flow.advect.semi_lagrangian(velocity_prev, velocity_prev, dt) + buoyancy * dt
-        velocity_next, pressure_next = flow.fluid.make_incompressible(velocity_tent)
+        smoke_next = flow.advect.mac_cormack(smoke_prev, velocity_prev, dt) + inflow
+        buoyancy_force = smoke_next * (0.0, 0.1) @ velocity
+        velocity_tent = flow.advect.semi_lagrangian(velocity_prev, velocity_prev, dt) + buoyancy_force * dt
+        velocity_next, pressure = flow.fluid.make_incompressible(velocity_tent)
         return velocity_next, smoke_next
-
+    
     plt.style.use("dark_background")
-
+    
     for _ in tqdm(range(N_TIME_STEPS)):
         velocity, smoke = step(velocity, smoke)
-        values_extracted = smoke.values.numpy("y,x")
-        plt.imshow(values_extracted, origin="lower")
+        smoke_values_extracted = smoke.values.numpy("y,x")
+        plt.imshow(smoke_values_extracted, origin="lower")
         plt.draw()
         plt.pause(0.01)
         plt.clf()
+        
 
 if __name__ == "__main__":
     main()
