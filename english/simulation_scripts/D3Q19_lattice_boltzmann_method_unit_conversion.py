@@ -69,27 +69,6 @@ density_P = 1400 # kg/m³
 KINEMATIC_VISCOSITY_P        = 0.1         # in m2/s
 HORIZONTAL_INFLOW_VELOCITY_P = 10          # in m/s
 
-# Lattice Boltzmann Lattice
-N_DISCRETE_VELOCITIES = 19
-
-LATTICE_INDICES =     jnp.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18])
-LATICE_VELOCITIES_X = jnp.array([0, 1,-1, 0, 0, 0, 0, 1,-1, 1,-1, 1,-1, 1,-1, 0, 0, 0, 0])
-LATICE_VELOCITIES_Y = jnp.array([0, 0, 0, 1,-1, 0, 0, 1, 1,-1,-1, 0, 0, 0, 0, 1,-1, 1,-1])
-LATICE_VELOCITIES_Z = jnp.array([0, 0, 0, 0, 0, 1,-1, 0, 0, 0, 0, 1, 1,-1,-1, 1, 1,-1,-1])
-
-LATTICE_VELOCITIES = jnp.array([LATICE_VELOCITIES_X,
-                                LATICE_VELOCITIES_Y,
-                                LATICE_VELOCITIES_Z])
-
-LATTICE_WEIGHTS = jnp.array([# rest particle
-                            1/3, 
-                            
-                            # face-connected neighbors
-                            1/18, 1/18, 1/18, 1/18, 1/18, 1/18,
-                            
-                            # edge-connected neighbors
-                            1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36])
-
 # Plotting parameters
 SECONDS_OF_SIMULATION = 3
 PLOT_EVERY_N_STEP = 250
@@ -155,6 +134,27 @@ print(f'Relaxation time:          {1.0 /RELAXATION_OMEGA: g}')
 
 # Now that we can convert from lattice coordinates and back we are done!
 # But it is more fun to apply it...
+
+# Lattice Boltzmann Lattice
+N_DISCRETE_VELOCITIES = 19
+
+LATTICE_INDICES =     jnp.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18])
+LATICE_VELOCITIES_X = jnp.array([0, 1,-1, 0, 0, 0, 0, 1,-1, 1,-1, 1,-1, 1,-1, 0, 0, 0, 0])
+LATICE_VELOCITIES_Y = jnp.array([0, 0, 0, 1,-1, 0, 0, 1, 1,-1,-1, 0, 0, 0, 0, 1,-1, 1,-1])
+LATICE_VELOCITIES_Z = jnp.array([0, 0, 0, 0, 0, 1,-1, 0, 0, 0, 0, 1, 1,-1,-1, 1, 1,-1,-1])
+
+LATTICE_VELOCITIES = jnp.array([LATICE_VELOCITIES_X,
+                                LATICE_VELOCITIES_Y,
+                                LATICE_VELOCITIES_Z])
+
+LATTICE_WEIGHTS = jnp.array([# rest particle
+                            1/3, 
+                            
+                            # face-connected neighbors
+                            1/18, 1/18, 1/18, 1/18, 1/18, 1/18,
+                            
+                            # edge-connected neighbors
+                            1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36])
 
 @jax.jit
 def get_density(discrete_velocities):
@@ -246,7 +246,7 @@ if __name__ == '__main__':
             discrete_velocities_post_collision = discrete_velocities_post_collision.at[OBSTACLE_MASK, LATTICE_INDICES[i]].set(
                                                           discrete_velocities_prev[OBSTACLE_MASK, OPPOSITE_LATTICE_INDICES[i]])
       
-       # (7) Stream alongside lattice velocities
+        # (7) Stream alongside lattice velocities
         discrete_velocities_streamed = discrete_velocities_post_collision
         for i in range(N_DISCRETE_VELOCITIES): 
             discrete_velocities_streamed = discrete_velocities_streamed.at[..., i].set(
@@ -280,8 +280,7 @@ if __name__ == '__main__':
                              alpha=0.8, cmap=cmr.amber)  
                 plt.axis('scaled')
                 plt.axis('off')
-                plt.show()
-
+                
                 time = jnp.linspace(0, 
                                     convert_to_physical_units(
                                         i, 
