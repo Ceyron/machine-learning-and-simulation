@@ -24,6 +24,10 @@ Maybe try it out with stress and force:
     https://colab.research.google.com/drive/1oryCdOPXapOWxGSgCDNkvSUQ_MahfoRX?usp=sharing
 - and on Github:   
     https://github.com/Ceyron/machine-learning-and-simulation/blob/main/english/simulation_scripts/D3Q19_lattice_boltzmann_method_stress_force_drag.py
+
+Multi-relaxation time method:
+- On Google Colab:
+    https://colab.research.google.com/drive/1TsVQTxkFVi18qLcPjBw0z2P6RbOehK5W?usp=sharing
     
 It is recommended to watch that video first and go through the notebook in 3D, 
 because a lot of explanation of this method, the setup and syntax mentioned in 

@@ -35,8 +35,12 @@ Other code on the LBM:
         - Google Colab: https://colab.research.google.com/drive/1oryCdOPXapOWxGSgCDNkvSUQ_MahfoRX?usp=sharing
         - and Github: https://github.com/Ceyron/machine-learning-and-simulation/blob/main/english/simulation_scripts/D3Q19_lattice_boltzmann_method_stress_force_drag.py
 
-- On unit conversion: [Google Colab](https://colab.research.google.com/drive/1OkpFHdGmCEmfEq1a_FgKsiRgc-gh6g2A?usp=sharing)
+- On unit conversion: 
+        - Google Colab: https://colab.research.google.com/drive/1OkpFHdGmCEmfEq1a_FgKsiRgc-gh6g2A?usp=sharings
 
+This code was originally written in Google Colab:
+    https://colab.research.google.com/drive/1TsVQTxkFVi18qLcPjBw0z2P6RbOehK5W?usp=sharing
+    
 It is recommended to watch that video first and go through the notebook on 3D LBM, 
 because a lot of explanation of this method, the setup and syntax mentioned in 
 that video and code will be skipped here.
