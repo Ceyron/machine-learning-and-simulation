@@ -114,6 +114,7 @@ And the force:
     
     F = ΔP/Δt 
     
+
 Since lattice time is 1 per step and cᵢ = −cî we can directly get the force with:
 
     F = ∑ᵢcᵢ(fᵢ + fî)
