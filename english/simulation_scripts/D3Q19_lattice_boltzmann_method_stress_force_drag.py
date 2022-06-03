@@ -114,13 +114,14 @@ And the force:
     
     F = ΔP/Δt 
     
-Since lattice time is 1 per step we can directly get the force:
+
+Since lattice time is 1 per step and cᵢ = −cî we can directly get the force with:
 
     F = ∑ᵢcᵢ(fᵢ + fî)
 
 ### Drag coefficient ###
 
-For spheres, the drag coefficient is determines using Stokes Law:
+For spheres, the drag coefficient is determined using Stokes Law:
     
     c_drag = 2F / ρ u²A
 
@@ -309,7 +310,7 @@ CACB = get_cαcβ(alpha, beta)
 
 # Force
 """
-For determining forece, we also need to determine for each point in the grid
+For determining force, we also need to determine for each point in the grid
 which lattice velocities are going into a grid, and which ones are going out of
 the sphere.
 """
