@@ -191,9 +191,9 @@ function cross_product!(
 end
 
 function main()
-    x_range = range(0.0, 2*pi, N_POINTS_P_AXIS)
-    y_range = range(0.0, 2*pi, N_POINTS_P_AXIS)
-    z_range = range(0.0, 2*pi, N_POINTS_P_AXIS)
+    x_range = range(0.0, 2*pi, N_POINTS_P_AXIS+1)[1:end-1]
+    y_range = range(0.0, 2*pi, N_POINTS_P_AXIS+1)[1:end-1]
+    z_range = range(0.0, 2*pi, N_POINTS_P_AXIS+1)[1:end-1]
 
     coordinates_x = [x for x in x_range, y in y_range, z in z_range]
     coordinates_y = [y for x in x_range, y in y_range, z in z_range]
