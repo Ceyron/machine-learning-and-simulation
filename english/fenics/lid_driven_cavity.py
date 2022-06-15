@@ -83,7 +83,7 @@ Solution strategy:
 
 3. Solve the weak form to the incompressibility correction. Solve for u**
 
-   <u**, v> = <u*, v> - 1/Δt <∇p*, v>
+   <u**, v> = <u*, v> - Δt <∇p*, v>
 
 
 In order to guarantee stability of the spatial discretization, we will
