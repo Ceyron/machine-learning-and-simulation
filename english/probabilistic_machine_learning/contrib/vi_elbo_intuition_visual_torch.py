@@ -3,10 +3,10 @@ Example script in PyTorch to complement the "elbo_intuitive_plot" script
 and YouTube video. 
 """
 
+from turtle import done
 import numpy as np
 import torch
 import torch.distributions as dist
-#import pyro.distributions as dist
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -18,17 +18,6 @@ def plot_mixture(probs, x, elbo, kl, evidence):
     plt.legend(['True Posterior', 'Surrogate Posterior'])
     plt.title('${} = {} + {}$'.format(elbo, kl, evidence))
     plt.show()
-
-
-def exact_kl_divergence(p, q):
-    """
-    computes dissimilarity between two distributions
-    THIS FUNCTION IS NOT COMPLETE
-    """
-
-    registered = dist.kl.register_kl(p, q)
-
-    return dist.kl_divergence(p, q)
 
 
 def approximate_kl_divergence(p, q, size):
@@ -78,9 +67,9 @@ def main():
         elbo = -mean_kl + evidence
         plot_mixture(all_prob_values, x, elbo, -mean_kl, evidence)
 
-        again = str(input('done: [y/n]: '))
+        done = str(input('done: [y/n]: '))
 
-        if again == 'y':
+        if done == 'y':
             break
         else:
             pass
