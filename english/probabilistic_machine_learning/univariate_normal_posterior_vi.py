@@ -77,7 +77,7 @@ def main():
     dataset = X_true.sample(N_SAMPLES, seed=RANDOM_SEED).numpy()
 
     # Surrogate posterior
-    alpha_s, beta_s, mu_s, tau_s = true_posterior_parameter(
+    alpha_s, beta_s, mu_s, tau_s = surrogate_posterior_parameter(
         dataset,
         ALPHA_0,
         BETA_0,
