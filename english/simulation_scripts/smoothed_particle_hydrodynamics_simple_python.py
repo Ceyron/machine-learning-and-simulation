@@ -302,6 +302,12 @@ def main():
         # Force due to gravity
         forces += CONSTANT_FORCE
 
+        ### There is an error in the video, in that the gravity is divided by the density which
+        ### wrongly scales it. Uncommenting the below, and commenting the call above will fix
+        ### that but, also slightly changes the visual result of the simulation.
+        # forces += CONSTANT_FORCE * densities[:, np.newaxis]
+        
+
         # Euler Step
         velocities = velocities + TIME_STEP_LENGTH * forces / densities[:, np.newaxis]
         positions = positions + TIME_STEP_LENGTH * velocities
