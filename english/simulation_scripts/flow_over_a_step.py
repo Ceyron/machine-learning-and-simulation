@@ -69,7 +69,7 @@ After the step, the flow adjusts to be over the entire
 crosssection of the pipe and develops the parabolic profile
 over the wider diameter.
 
-Towards the end of the domain, the flow is fully developped
+Towards the end of the domain, the flow is fully developed
 and adheres to the outflow boundary condition.
 
 The 🔄 indicates spot, in which vortices develop depending

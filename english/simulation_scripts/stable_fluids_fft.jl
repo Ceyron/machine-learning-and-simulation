@@ -1,4 +1,4 @@
-"""
+s"""
 Solves the equations of fluid flow using "Stable Fluids" by Jos Stam with the
 FFT to obtain ultra-fast simulations.
 
@@ -45,7 +45,7 @@ A unit square domain with periodic boundary conditions on each edge
           0 +-------------------------------------------------+
             0        0.2       0.4       0.6       0.8        1
 
--> Centered in y but ofset in x there are two horizontal forcings in opposite
+-> Centered in y but offset in x there are two horizontal forcings in opposite
    directions
 
 -> Two fluid streams will "collide" with each other
