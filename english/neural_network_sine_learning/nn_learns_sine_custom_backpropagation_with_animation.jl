@@ -95,7 +95,7 @@ Learning:
     2. Run forward and backward pass (here for all samples together - no minibatching)
     3. Update each parameter with its gradient, e.g.
         W_1 ← W_1 - η * d_W_1
-    4. Repeat until loss is suffiently decreased
+    4. Repeat until loss is sufficiently decreased
 
 ---
 
@@ -113,7 +113,7 @@ We involved the following primitive pullback/vJp/backprop/adjoint(¹) rules:
 
 The indented pullback operations map back into the parameter space.
 
-If you want more details, on why these (obsurd) rules are the way, they are,
+If you want more details, on why these (absurd) rules are the way, they are,
 here are more interesting videos:
 
     1.  
