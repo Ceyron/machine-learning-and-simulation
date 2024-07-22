@@ -1,6 +1,6 @@
 ![# Mathematics for Machine Learning and Simulation](https://user-images.githubusercontent.com/27728103/113576088-327ae700-961f-11eb-9611-05a9c8e7a0b1.png)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12793324.svg)](https://doi.org/10.5281/zenodo.12793324)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12793323.svg)](https://doi.org/10.5281/zenodo.12793323)
 
 Here you can find all the material of my [YouTube Channel](https://www.youtube.com/channel/UCh0P7KwJhuQ4vrzc3IRuw4Q).
 
