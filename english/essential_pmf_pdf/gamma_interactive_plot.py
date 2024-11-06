@@ -13,7 +13,7 @@ def main():
         layout="wide",
     )
 
-    col_left, col_right = st.beta_columns((1, 1))
+    col_left, col_right = st.columns((1, 1))
 
     col_left.title("Interactive Gamma Plot")
 
