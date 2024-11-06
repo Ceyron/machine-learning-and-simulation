@@ -22,7 +22,7 @@ def main():
 
     st.title("Interactive Plot for the Multivariate Normal")
 
-    col_left, col_right = st.beta_columns((1, 1))
+    col_left, col_right = st.columns((1, 1))
     col_left.latex("""
         f(x) = \\frac{{
             1

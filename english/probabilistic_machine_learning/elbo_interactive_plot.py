@@ -70,7 +70,7 @@ def main():
         page_icon="https://user-images.githubusercontent.com/27728103/116659788-6a611a00-a992-11eb-9cc7-ce02db99f106.png"
     )
 
-    col_left, col_right = st.beta_columns((1, 1))
+    col_left, col_right = st.columns((1, 1))
 
     col_left.title("Interactive ELBO plot")
     col_left.latex("""
