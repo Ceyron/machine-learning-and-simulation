@@ -12,3 +12,5 @@ numpy==2.0.2
 silence_tensorflow==1.2.3
 cmasher==1.8.0
 scikit_learn==1.5.2
+keras==3.6.0
+tf_keras==2.18.0
