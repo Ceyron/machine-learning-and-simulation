@@ -104,7 +104,7 @@ i  : The imaginary unit (1D scalar)
 
 7. Compute the rhs to the ODE system
 
-    b = m - ν ||k||₂² λ - (k ψ) / ||k||₂
+    b = ϕ - ν ||k||₂² λ - (k ψ) / ||k||₂
 
 8. Advance the velocity in Fourier Domain by means of an
    Explicit Euler time step
