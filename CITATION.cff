@@ -1,8 +1,28 @@
 cff-version: 1.2.0
-message: "If you find the Repository and corresponding YouTube videos helpful, please cite as below."
-authors:
-- family-names: "Koehler"
-  given-names: "Felix"
+message: "If you find this repository and the corresponding YouTube videos helpful, please cite it using the metadata below."
+type: software
 title: "Machine Learning and Simulation"
-url: "https://github.com/ceyron/machine-learning-and-simulation"
-doi: "https://zenodo.org/doi/10.5281/zenodo.12793323"
+authors:
+  - given-names: Felix
+    family-names: Koehler
+repository-code: "https://github.com/Ceyron/machine-learning-and-simulation"
+url: "https://www.youtube.com/@MachineLearningSimulation"
+license: MIT
+doi: "10.5281/zenodo.12793323"
+keywords:
+  - "machine learning"
+  - "simulation"
+  - "scientific computing"
+  - "computational fluid dynamics"
+  - "finite element method"
+  - "automatic differentiation"
+  - "educational resources"
+  - "tutorials"
+  - "Jupyter notebooks"
+abstract: >-
+  Handwritten notes and source code accompanying the YouTube channel
+  "Machine Learning & Simulation". Covers a broad range of topics at the
+  intersection of numerical methods and machine learning, including
+  probabilistic machine learning, sparse matrices, continuum mechanics,
+  automatic differentiation, the finite element method, and from-scratch
+  implementations of simulations in Python and Julia.
